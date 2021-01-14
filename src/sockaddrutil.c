@@ -23,7 +23,7 @@
 
 
 
-#include "sockaddr_util.h"
+#include "sockaddrutil.h"
 
 void
 sockaddr_reset(struct sockaddr_storage* sa)

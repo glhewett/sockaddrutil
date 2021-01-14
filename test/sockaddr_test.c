@@ -9,7 +9,7 @@
 #include <string.h>
 
 #include "test_utils.h"
-#include "sockaddr_util.h"
+#include "sockaddrutil.h"
 
 const char ipv4_1_str[] = "192.168.2.1:4567\0";
 const char ipv4_2_str[] = "10.47.1.58:4567\0";
