@@ -19,7 +19,7 @@ install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME}Targets
         INCLUDES destination include)
 
 install(EXPORT ${LIB_NAME}Targets
-        FILE ${LIB_NAME}Targets.cmake
+        FILE ${${LIB_NAME}Targets}.cmake
         NAMESPACE ${LIB_NAME}
         DESTINATION lib/cmake/${LIB_NAME})
 
