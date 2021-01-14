@@ -10,8 +10,11 @@
 #include <netinet/in.h>
 
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__MACH__)
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX == 1
 #include <netinet/in_var.h>
+#endif
 #endif
 
 
@@ -384,6 +387,13 @@ sockaddr_isAddrLinkLocal(const struct sockaddr* sa)
 {
   if (sa->sa_family == AF_INET)
   {
+    uint32_t link_169 = 0xA9FE0000;
+    uint32_t mask_16     = 0xFFFF0000;
+    if ( (htonl( ( (struct sockaddr_in*)sa )->sin_addr.s_addr ) & mask_16) ==
+         link_169 )
+    {
+      return true;
+    }
     return false;
   }
   else if (sa->sa_family == AF_INET6)
@@ -425,7 +435,9 @@ sockaddr_isAddrULA(const struct sockaddr* sa)
   return false;
 }
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__MACH__)
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX == 1
 int
 sockaddr_getIPv6Flags(const struct sockaddr* sa,
                       const char*            ifa_name,
@@ -510,6 +522,7 @@ sockaddr_isAddrDeprecated(const struct sockaddr* sa,
   }
   return false;
 }
+#endif
 #endif
 
 
